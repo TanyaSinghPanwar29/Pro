@@ -1,0 +1,26 @@
+.auth-parent{
+    position: fixed;
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+.blue-region{
+    display: flex;
+    align-items: flex-end;
+    height: 100%;
+    width: 70%;
+    background-color: var(--primary-color);
+}
+
+.logo-region{
+    height: 100px;
+    width: 100px;
+    background-color: orange;
+}
+
+.authentication-region{
+    height: 100%;
+    width: 30%;
+    background-color: var(--white);
+}
