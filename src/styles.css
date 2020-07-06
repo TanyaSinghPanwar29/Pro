@@ -8,3 +8,30 @@
     --white: #fff;
     --black: #000;
 }
+
+@font-face {
+    font-family: avenir-light;
+    font-style: normal;
+    font-weight: normal;
+    src: url('./assets/fonts/AvenirLTStd-Book.otf');
+  }
+  @font-face {
+    font-family: avenir-medium;
+    font-style: normal;
+    font-weight: normal;
+    src:  url('./assets/fonts/AvenirLTStd-Medium.otf');
+  }
+  @font-face {
+    font-family: avenir-heavy;
+    font-style: normal;
+    font-weight: normal;
+    src: url('./assets/fonts/AvenirLTStd-Roman.otf');
+  }
+
+  body{
+    font-family: avenir-medium;
+  }
+
+  *{
+      outline: none;
+  }

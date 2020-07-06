@@ -9,6 +9,7 @@
 .blue-region{
     /* height: 100%; */
     /* width: 70%; */
+    padding: 0 0 45px 45px;
     flex-grow: 2;
     display: flex;
     align-items: flex-end;
@@ -21,25 +22,16 @@
     /* width: 30%; */
     flex-grow: 1;
     display: flex;
-    align-items: flex-end;
+    align-items: center;
+    justify-content: center;
     background-color: var(--white);
    
 }
 .logo-region{
-    position: absolute;
-    width: 320px;
-    height: 100px;
-    top: 150px;
-    left: 10px;
-    margin-left: 50px;
-}
-.logo-region1{
 
-    float: none;
+}
+.signup-container{
     text-align: center;
-    margin: 50px auto 0 auto;
-    height: 600px;
-   
 }
 .mytext{
     color: var(--white);
@@ -48,6 +40,7 @@
     width: 500px;
 }
 .mytext1{
+    margin-top: 34px;
     color: var(--white);
     width: 320px;
 }
@@ -56,31 +49,37 @@
 }
 #email{
     background-image: url('src/assets/mail-icon.svg');
-    position: left;
-    padding-left: 50px;
-    background-size: 20px;
-    background-repeat: no-repeat;
-    border-radius: 8px;
-    height: 30px; 
 }
 .mytext3{
     margin-top: 10px; 
     margin-bottom: 60px; 
 }
+.mytext4{
+    color: #707070;
+}
+.mytext4 span{
+    color: var(--black);
+    cursor: pointer;
+}
+.input-field{
+    border: 1px solid var(--primary-color);
+    height: 45px;
+    border-radius: 45px !important;
+    width: 165px;
+    padding-left: 60px;
+    background-position-x: 20px;
+    background-repeat: no-repeat;
+    background-position-y: center;
+}
 
 #password{
     background-image: url('src/assets/password-icon.svg');
-    position: left;
-    padding-left: 50px;
-    background-size: 13px;
-    background-repeat: no-repeat;
-    border-radius: 8px;
-    height: 30px; 
 }
 .btn{
     width: 220px;
-    margin-bottom: 60px; 
-    border-radius: 8px;
-    height: 40px; 
+    margin-bottom: 60px;
+    border-radius: 60px;
+    height: 45px;
+    border: none;
     background-color: var(--primary-color);
 }
