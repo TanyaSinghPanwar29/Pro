@@ -6,6 +6,9 @@
     display: flex;
     background-color: orange;
 }
+.su-input p {
+    margin: 5px 0 0 0;
+}
 .blue-region{
     /* height: 100%; */
     /* width: 70%; */
@@ -52,7 +55,6 @@
 }
 .mytext3{
     margin-top: 10px; 
-    margin-bottom: 60px; 
 }
 .mytext4{
     color: #707070;
@@ -65,18 +67,22 @@
     border: 1px solid var(--primary-color);
     height: 45px;
     border-radius: 45px !important;
-    width: 165px;
-    padding-left: 60px;
+    width: 190px;
+    padding: 0 20px 0 60px;
     background-position-x: 20px;
     background-repeat: no-repeat;
     background-position-y: center;
 }
-
+.input-container{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 60px;
+}
 #password{
     background-image: url('src/assets/password-icon.svg');
 }
 .btn{
-    width: 220px;
+    width: 270px;
     margin-bottom: 60px;
     border-radius: 60px;
     height: 45px;
