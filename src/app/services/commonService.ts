@@ -13,7 +13,6 @@ export class CommonService{
     
     makePostRequest = (url,body) =>
      {
-        console.log(body)
         let fullUrl = BaseURL.url + url;
         console.log(fullUrl)
         return this.http.post(fullUrl,body

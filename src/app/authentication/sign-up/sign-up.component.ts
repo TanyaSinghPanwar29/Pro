@@ -51,7 +51,7 @@ export class SignUpComponent implements OnInit {
     }
     console.log(body)
     this.commonService.makePostRequest(ApplicationURLs.signUp,body).subscribe((res)=>{
-      console.log(res,"FUCK THIS SHIT AM OUT")
+      console.log(res,"MUBARAK HO!")
     });
     
     
