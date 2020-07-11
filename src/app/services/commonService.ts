@@ -15,12 +15,7 @@ export class CommonService{
      {
         let fullUrl = BaseURL.url + url;
         console.log(fullUrl)
-        return this.http.post(fullUrl,body
-            // {
-            //     headers: new HttpHeaders ({ 'Content-Type': 'application/json' }),
-               
-            //  }
-               )
+        return this.http.post(fullUrl,body)
             
      }
 }

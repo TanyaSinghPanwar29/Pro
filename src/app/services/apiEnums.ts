@@ -1,5 +1,5 @@
 export enum BaseURL {
-    url = "localhost:3000/"
+    url = "http://www.localhost:3000/"
 }
 
 export enum ApplicationURLs  {
