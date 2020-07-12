@@ -11,11 +11,8 @@ export class CommonService{
         private http: HttpClient
     ){}
     
-    makePostRequest = (url,body) =>
-     {
+    makePostRequest = (url,body) => {
         let fullUrl = BaseURL.url + url;
-        console.log(fullUrl)
-        return this.http.post(fullUrl,body)
-            
+        return this.http.post(fullUrl,body);
      }
 }
