@@ -29,11 +29,9 @@ export class SignUpComponent implements OnInit {
 
   ngOnInit(): void {
     
-    // this.buildForm();
+   
   }
-  // buildForm = () => {
-  //   this.signUpForm = 
-  // }
+  
   navigateToSignIn = () => {
     this.router.navigateByUrl('login')
   }

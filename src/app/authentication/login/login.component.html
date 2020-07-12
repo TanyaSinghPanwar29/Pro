@@ -1,16 +1,41 @@
-<div class="auth-parent">
-
+<div class="auth-container">
     <div class="blue-region">
         <div class="logo-region">
-            
+            <img src="./assets/Logo-Low-Opacity.svg">
+            <div class="logo-message">
+                <span class="mytext">WELCOME TO CHAT HUB</span>
+                <p class="mytext1">Join our  community to spend a quality time with your knowns.</p>
+            </div>
         </div>
-
-
+    </div>
+    <div class="white-region">
+        <div class="signup-container">
+        <img src="./assets/Logo.svg">
+        <h2 class="mytext2">JOIN US</h2>
+        <form [formGroup]="loginForm">
+        <div class="input-container">
+                <div class="su-input" >
+                    <input [ngClass]="{'redBorder': this.validator.getErrorMessage(this.loginForm.get('email'),'email')}"
+                           formControlName="email" class="mytext2 input-field" placeholder="EMAIL" type="email" id="email" name="email">
+                    <p class="errorMessage">{{ this.validator.getErrorMessage(this.loginForm.get('email'),'email') }}</p>
+                </div>
+                <div class="su-input">
+                    <input [ngClass]="{'redBorder': this.validator.getErrorMessage(this.loginForm.get('password'),'password')}"
+                    formControlName="password" class="mytext3 input-field" type="password" placeholder="PASSWORD" id="password" name="password">
+                    <p class="errorMessage">{{ this.validator.getErrorMessage(this.loginForm.get('password'),'password') }}</p>
+                </div>
+                <div class="su-input">
+                    <input [ngClass]="{'redBorder': this.validator.getErrorMessage(this.loginForm.get('confirm_password'),'password')}"
+                    formControlName="confirm_password" class="mytext3 input-field" type="password" placeholder="CONFIRM PASSWORD" id="password" name="password">   
+                    <p class="errorMessage">{{ this.validator.getErrorMessage(this.loginForm.get('confirm_password'),'password') }}</p>
+                </div>
+               
+        </div>
+        </form>
+        <button (click)="this.login()" class="btn cursor-pointer btn-primary"><b class="mytext1">LOGIN</b></button>
+        <p class="mytext4">get Registerd? <span (click)="this.navigateToSignUp()">Sign Up</span></p>
     </div>
 
-    <div class="authentication-region">
-
     </div>
-
 
 </div>

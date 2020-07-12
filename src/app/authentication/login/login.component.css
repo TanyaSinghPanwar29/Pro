@@ -1,24 +1,90 @@
-.auth-parent{
-    position: fixed;
-    height: 100%;
+.auth-container{
+    height:100%; 
     width: 100%;
+    overflow-y: auto;
+    position: fixed;
     display: flex;
 }
-
+.su-input p {
+    margin: 5px 0 0 0;
+}
 .blue-region{
+    /* height: 100%; */
+    /* width: 70%; */
+    padding: 0 0 45px 45px;
+    flex-grow: 2;
     display: flex;
     align-items: flex-end;
-    flex-grow: 2;
     background-color: var(--primary-color);
-}
-.authentication-region{
-    display: flex;
-    flex-grow: 1;
-    background-color: var(--white);
-}
-.logo-region{
-    height: 100px;
-    width: 100px;
-    background-color: orange;
+    
 }
 
+.white-region{
+    /* height: 100%; */
+    /* width: 30%; */
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--white);
+   
+}
+.logo-region{
+
+}
+.signup-container{
+    text-align: center;
+}
+.mytext{
+    color: var(--white);
+    font-size: 35px;
+    margin-bottom: 25px;
+    width: 500px;
+}
+.mytext1{
+    margin-top: 34px;
+    color: var(--white);
+    width: 320px;
+}
+.mytext2{
+    margin-top: 50px;
+}
+#email{
+    background-image: url('src/assets/mail-icon.svg');
+}
+.mytext3{
+    margin-top: 10px; 
+}
+.mytext4{
+    color: #707070;
+}
+.mytext4 span{
+    color: var(--black);
+    cursor: pointer;
+}
+.input-field{
+    border: 1px solid var(--primary-color);
+    height: 45px;
+    border-radius: 45px !important;
+    width: 190px;
+    padding: 0 20px 0 60px;
+    background-position-x: 20px;
+    background-repeat: no-repeat;
+    background-position-y: center;
+}
+.input-container{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 60px;
+}
+#password{
+    background-image: url('src/assets/password-icon.svg');
+}
+.btn{
+    width: 270px;
+    margin-bottom: 60px;
+    border-radius: 60px;
+    height: 45px;
+    border: none;
+    background-color: var(--primary-color);
+}
