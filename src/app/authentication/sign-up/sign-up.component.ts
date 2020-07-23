@@ -14,12 +14,8 @@ export class SignUpComponent implements OnInit {
 
   public validator: Validator = new Validator();
 
-  signUpForm: FormGroup = new FormGroup({
-    "email": new FormControl('',[Validators.required,Validators.pattern(this.validator.emailRegex)]),
-    "password": new FormControl('',[Validators.required,Validators.minLength(this.validator.minLengths.password)]),
-    "confirm_password": new FormControl('',[Validators.required,Validators.minLength(this.validator.minLengths.password)])
-  }); 
-  
+  signUpForm: FormGroup;
+ 
   constructor(
     public router: Router,
     public fb:FormBuilder,
@@ -28,24 +24,35 @@ export class SignUpComponent implements OnInit {
   {}
 
   ngOnInit(): void {
-    
-   
+    this.buildForm();
   }
   
+  buildForm = () => {
+    this.signUpForm = new FormGroup({
+      "email": new FormControl('',[Validators.required,Validators.pattern(this.validator.emailRegex)]),
+      "password": new FormControl('',[Validators.required,Validators.minLength(this.validator.minLengths.password)]),
+      "confirm_password": new FormControl('',[Validators.required,this.confirmPasswordValidator])
+    }); 
+  }
+
   navigateToSignIn = () => {
     this.router.navigateByUrl('login')
   }
 
   signUp = () => {
+
+    
+    
     this.signUpForm.markAllAsTouched();
     this.signUpForm.markAsDirty();
-
+    
     if(this.signUpForm.invalid)
     return;
 
     let body = {
       email: this.signUpForm.get('email').value,
-      password: this.signUpForm.get('password').value
+      password: this.signUpForm.get('password').value,
+      
     }
     console.log(body)
     this.commonService.makePostRequest(ApplicationURLs.signUp,body).subscribe((res)=>{
@@ -53,6 +60,23 @@ export class SignUpComponent implements OnInit {
     });
     
     
+  }
+  confirmPasswordValidator = (control: FormControl) => {
+    if(!this.signUpForm)
+    return;
+    
+    let password = this.signUpForm.get('password').value.toString();
+    let confirmPassword = control.value.toString();
+    if(!password || !confirmPassword)
+    return null;
+
+    if (password !== confirmPassword){
+      return {
+        valid: false
+      }
+    }
+
+    return null;
   }
 
 }

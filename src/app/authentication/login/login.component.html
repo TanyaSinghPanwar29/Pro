@@ -24,11 +24,7 @@
                     formControlName="password" class="mytext3 input-field" type="password" placeholder="PASSWORD" id="password" name="password">
                     <p class="errorMessage">{{ this.validator.getErrorMessage(this.loginForm.get('password'),'password') }}</p>
                 </div>
-                <div class="su-input">
-                    <input [ngClass]="{'redBorder': this.validator.getErrorMessage(this.loginForm.get('confirm_password'),'password')}"
-                    formControlName="confirm_password" class="mytext3 input-field" type="password" placeholder="CONFIRM PASSWORD" id="password" name="password">   
-                    <p class="errorMessage">{{ this.validator.getErrorMessage(this.loginForm.get('confirm_password'),'password') }}</p>
-                </div>
+               
                
         </div>
         </form>

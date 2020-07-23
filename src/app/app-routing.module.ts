@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { SignUpComponent } from './authentication/sign-up/sign-up.component';
 import { LoginComponent } from './authentication/login/login.component';
 import { ProfileComponent } from './authentication/profile/profile.component';
+import { TextmsgComponent } from './authentication/textmsg/textmsg.component';
+import { DetailsEditComponent } from './authentication/details-edit/details-edit.component';
 
 
 const routes: Routes = [
@@ -22,6 +24,14 @@ const routes: Routes = [
   {
     path: 'profile',
     component: ProfileComponent
+  },
+  {
+    path: 'textmsg',
+    component: TextmsgComponent
+  },
+  {
+    path: 'details-edit',
+    component: DetailsEditComponent
   }
 ];
 

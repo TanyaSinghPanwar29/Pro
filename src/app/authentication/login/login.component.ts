@@ -4,6 +4,7 @@ import { FormGroup, Validators, FormControl, FormBuilder } from '@angular/forms'
 import { CommonService } from 'src/app/services/commonService';
 import { Validator } from 'src/app/validator-util';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit {
     public fb:FormBuilder,
     public commonService: CommonService
     ) { }
-
+    
   ngOnInit(): void {
   }
 
@@ -27,10 +28,13 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup = new FormGroup({
     "email": new FormControl('',[Validators.required,Validators.pattern(this.validator.emailRegex)]),
     "password": new FormControl('',[Validators.required,Validators.minLength(this.validator.minLengths.password)]),
-    "confirm_password": new FormControl('',[Validators.required,Validators.minLength(this.validator.minLengths.password)])
   }); 
+  
+  
 
   login(){
+   
+
     this.loginForm.markAllAsTouched();
     this.loginForm.markAsDirty();
 
