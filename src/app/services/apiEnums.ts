@@ -3,9 +3,9 @@ export enum BaseURL {
 }
 
 export enum ApplicationURLs  {
-    signUp = "api/createUser"
-}
-
-export enum EditDetailsURLs {
+    signUp = "api/createUser",
+    login ="api/signIn",
     EditDetails = "api/update-profile"
 }
+
+

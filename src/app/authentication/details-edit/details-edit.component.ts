@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CommonService } from 'src/app/services/commonService';
-import { ApplicationURLs, EditDetailsURLs } from 'src/app/services/apiEnums';
+import { ApplicationURLs } from 'src/app/services/apiEnums';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-details-edit',
@@ -11,7 +12,7 @@ import { ApplicationURLs, EditDetailsURLs } from 'src/app/services/apiEnums';
 export class DetailsEditComponent implements OnInit {
   DetailsEditForm: FormGroup;
 
-  constructor( public commonService: CommonService) {
+  constructor( public commonService: CommonService , private utilsService : UtilsService) {
    
    }
 
@@ -29,7 +30,7 @@ export class DetailsEditComponent implements OnInit {
     console.log(this.DetailsEditForm)
   }
   onEditDetails(){
-    console.log(this.DetailsEditForm.value)
+   
 
     this.DetailsEditForm.markAllAsTouched();
     this.DetailsEditForm.markAsDirty();
@@ -42,12 +43,14 @@ export class DetailsEditComponent implements OnInit {
       "last_Name" :  this.DetailsEditForm.value.last_Name,
       "location":  this.DetailsEditForm.value.location,
       "description":  this.DetailsEditForm.value.description,
-      "token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFiY0BnbWFpbC5jb20iLCJjcmVhdGVkQXQiOiIyMDIwLTA3LTIzIDA6MTA6NDQiLCJpYXQiOjE1OTU1Mjk2NDQsImV4cCI6MTU5NTUzMDI0NH0.pZs1nrOLuyGh8fFzOv4B71nbhiEJjhi8CMD4Hyck-mF9BJ9k0YaZoHK8aAluqWvnLaPYAT2WR5QFNfgsnZyTiEPWKcgLOp-ZOqF-eAYqZQHQAgChQnw_gSn6f8AzQQZRibrPZqLd7QancWqBmnU__fzjYG4wgvDjNzrMc1sLA50"
+      "token": this.utilsService.getToken()
     }
-
-    this.commonService.editDetails(EditDetailsURLs.EditDetails,body).subscribe(res =>{
+  
+      this.commonService.makePostRequest(ApplicationURLs.EditDetails ,body).subscribe(res =>{
       console.log(res)
     })
+
+  
    
   }
   

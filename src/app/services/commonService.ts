@@ -21,4 +21,6 @@ export class CommonService{
         let fullUrl = BaseURL.url + url
         return this.http.post(fullUrl,body)
     }  
+
+    
 }

@@ -55,8 +55,13 @@ export class SignUpComponent implements OnInit {
       
     }
     console.log(body)
-    this.commonService.makePostRequest(ApplicationURLs.signUp,body).subscribe((res)=>{
+    this.commonService.makePostRequest(ApplicationURLs.signUp,body).subscribe((res:any)=>{
       console.log(res,"MUBARAK HO!")
+      if(res.success){
+        this.router.navigateByUrl('login')
+      } else{
+        //TO DO
+      }
     });
     
     
