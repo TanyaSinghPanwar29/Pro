@@ -1,21 +1,30 @@
 <div class="container">
     <div class="white">
         <div class="box">
-            <input class="inputbox" placeholder="CHAT HUB PROFILE UPDATE">
             <div class="heading">EDIT YOUR PROFILE</div>
-            <div class="input1">
-                <div class="names">
-                  <input class="first-name" placeholder="First Name">
-                  <input class="last-name" placeholder="Last-Name">
-                </div><br>
-                <div class="details">
-                   <input class="email" placeholder="Email">
-                   <input class="location" placeholder="Location">
+            <form [formGroup]="DetailsEditForm">
 
+                <div class="input1">
+                    <div class="names">
+                      <input class="first-name hoverinput" placeholder="First Name"  formControlName="first_Name" minlength="5" required>
+                      <span
+                      *ngIf="!DetailsEditForm.get('first_Name').valid && DetailsEditForm.get('first_Name').touched" 
+                       class="error">
+                      Name should contain min 5 char..
+                      </span>
+
+                      <input class="last-name hoverinput" placeholder="Last Name"  formControlName="last_Name" >
+                    </div>
+                    <div class="details">
+                       <input class="email hoverinput" placeholder="Email"type="email" >
+                       <input class="location hoverinput" placeholder="Location"  formControlName="location" >
+                    </div>
                 </div>
-            </div>
-            <textarea class="description" placeholder="DESCRIPTION...."></textarea>
-            <button class="save-button">SAVE</button>
+                <textarea class="description hoverinput" placeholder="DESCRIPTION...." formControlName="description"></textarea>
+
+            </form>
+            
+            <button class="save-button" (click)="onEditDetails()">SAVE</button>
         </div>
        
         

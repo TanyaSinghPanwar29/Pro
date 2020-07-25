@@ -16,4 +16,9 @@ export class CommonService{
         let fullUrl = BaseURL.url + url;
         return this.http.post(fullUrl,body);
      }
+
+    editDetails = (url,body) =>{
+        let fullUrl = BaseURL.url + url
+        return this.http.post(fullUrl,body)
+    }  
 }
