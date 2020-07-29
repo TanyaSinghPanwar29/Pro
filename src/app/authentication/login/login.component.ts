@@ -14,6 +14,8 @@ import { UtilsService } from 'src/app/services/utils.service';
 })
 export class LoginComponent implements OnInit {
 
+  serviceErrorMessage = { message: '', show: false }
+
   constructor(private router: Router,
     public fb: FormBuilder,
     public commonService: CommonService,
@@ -31,13 +33,12 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup = new FormGroup({
     "email": new FormControl('', [Validators.required, Validators.pattern(this.validator.emailRegex)]),
     "password": new FormControl('', [Validators.required, Validators.minLength(this.validator.minLengths.password)]),
+    "login-button": new FormControl()
   });
 
  
 
   login() {
-
-
     this.loginForm.markAllAsTouched();
     this.loginForm.markAsDirty();
     let Body = {
@@ -45,11 +46,14 @@ export class LoginComponent implements OnInit {
       password: this.loginForm.value.password
     }
    
-    if (this.loginForm.invalid)
+    if (this.loginForm.invalid || this.loginForm.controls["login-button"].disabled)
       return;
+    
+    this.loginForm.controls["login-button"].disable();
     this.commonService.makePostRequest(ApplicationURLs.login, Body).subscribe(
       (res: any) => {
-        if (!res || !res.token) {
+        this.loginForm.controls["login-button"].enable();
+        if (!res) {
           return;
         }
         
@@ -66,13 +70,18 @@ export class LoginComponent implements OnInit {
               button: 'SAVE'
             }]);
           }
+        } else if(res.success === false){
+          this.setServiceErrorMessage(res);
         }
       }
 
 
-
-
     )
   }
-
+  setServiceErrorMessage = (res) => {
+    this.serviceErrorMessage = {
+      message: res.message,
+      show: !res.success
+    }
+  }
 }

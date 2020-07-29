@@ -27,9 +27,13 @@
                
                
         </div>
-        </form>
-        <button (click)="this.login()" class="btn cursor-pointer btn-primary"><b class="mytext1">LOGIN</b></button>
-        <p class="mytext4">get Registerd? <span (click)="this.navigateToSignUp()">Sign Up</span></p>
+        <div class="login-btn">
+            <button [ngClass]="{ 'disabled-auth-btn': this.loginForm.controls['login-button'].disabled }" formControlName="login-button" (click)="this.login()" class="btn cursor-pointer btn-primary"><b class="mytext1">LOGIN</b></button>
+            <p class="errorMessage" *ngIf="this.serviceErrorMessage?.show">{{this.serviceErrorMessage?.message}}</p>
+           
+        </div>
+        <p class="mytext4">Get Registered? <span (click)="this.navigateToSignUp()">Sign Up</span></p>
+    </form>
     </div>
 
     </div>
