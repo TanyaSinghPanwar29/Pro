@@ -14,6 +14,12 @@ export class UtilsService {
    }
    localStorage.setItem("token",token) 
   } 
+  setEmail(email){
+    if(!email){
+      return ;
+    }
+    localStorage.setItem("email",email)
+  }
   getToken(){
     let getToken:any = localStorage.getItem("token");
     console.log(getToken)
@@ -22,6 +28,16 @@ export class UtilsService {
     }
     else{
       //TO DO sign out
+    }
+  }
+
+  getEmail(){
+    let getEmail = localStorage.getItem("email");
+    if(getEmail){
+      return getEmail
+    }
+    else{
+      //TO DO 
     }
   }
 }

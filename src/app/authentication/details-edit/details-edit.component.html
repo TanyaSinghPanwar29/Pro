@@ -1,37 +1,55 @@
 <div class="container">
     <div class="white">
         <div class="box">
-            <div class="heading">EDIT YOUR PROFILE</div>
+            <div class="heading">{{this.screenParameters?.heading}}</div>
             <form [formGroup]="DetailsEditForm">
 
                 <div class="input1">
                     <div class="names">
-                      <input class="first-name hoverinput" placeholder="First Name"  formControlName="first_Name" minlength="5" required>
-                      <span
-                      *ngIf="!DetailsEditForm.get('first_Name').valid && DetailsEditForm.get('first_Name').touched" 
-                       class="error">
-                      Name should contain min 5 char..
-                      </span>
+                        <div class="name-field position-relative">
+                            <input class="first-name hoverinput" placeholder="First Name" formControlName="first_Name">
+                            <div class="errorMessage position-absolute">
+                                <span>{{this.validator?.getErrorMessage(this.DetailsEditForm.get('first_Name'),'name')}}</span>
+                            </div>
+                        </div>
 
-                      <input class="last-name hoverinput" placeholder="Last Name"  formControlName="last_Name" >
+                        <div class="name-field position-relative">
+                            <input class="last-name hoverinput" placeholder="Last Name" formControlName="last_Name">
+                            <div class="errorMessage position-absolute">
+                                <span>{{this.validator?.getErrorMessage(this.DetailsEditForm.get('last_Name'),'name')}}</span>
+                            </div>
+                        </div>
+
+
+
                     </div>
                     <div class="details">
-                       <input class="email hoverinput" placeholder="Email"type="email" >
-                       <input class="location hoverinput" placeholder="Location"  formControlName="location" >
+                        <div class="name-field position-relative">
+                            <input class="email hoverinput" placeholder="Email" type="email" formControlName="email">
+                        </div>
+
+                        <div class="name-field position-relative">
+                            <input class="location hoverinput" placeholder="Location" formControlName="location">
+                            <div class="errorMessage position-absolute">
+                                <span>{{this.validator?.getErrorMessage(this.DetailsEditForm.get('location'),'location')}}</span>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
-                <textarea class="description hoverinput" placeholder="DESCRIPTION...." formControlName="description"></textarea>
+                <textarea class="description hoverinput" placeholder="DESCRIPTION...."
+                    formControlName="description"></textarea>
 
             </form>
-            
-            <button class="save-button" (click)="onEditDetails()">SAVE</button>
+
+            <button class="save-button" (click)="onEditDetails()">{{this.screenParameters?.button}}</button>
         </div>
-       
-        
-        </div>
-    
+
+
+    </div>
+
     <div class="grey">
-       
+
     </div>
 
 </div>

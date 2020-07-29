@@ -3,6 +3,9 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CommonService } from 'src/app/services/commonService';
 import { ApplicationURLs } from 'src/app/services/apiEnums';
 import { UtilsService } from 'src/app/services/utils.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Validator } from 'src/app/validator-util';
+
 
 @Component({
   selector: 'app-details-edit',
@@ -11,23 +14,30 @@ import { UtilsService } from 'src/app/services/utils.service';
 })
 export class DetailsEditComponent implements OnInit {
   DetailsEditForm: FormGroup;
-
-  constructor( public commonService: CommonService , private utilsService : UtilsService) {
-   
+  screenParameters: any;
+  validator: Validator = new Validator();
+  constructor( public commonService: CommonService , private utilsService : UtilsService, private route: ActivatedRoute) {
+     
    }
 
   ngOnInit(): void {
+    this.route.params.subscribe(res =>{
+      this.screenParameters = res;
+      console.log(this.screenParameters)
+    })
     this.formdetails()
   }
-
+  
   formdetails = () => {
+    this.utilsService.getEmail();
     this.DetailsEditForm = new FormGroup({
-      "first_Name" : new FormControl('',[Validators.required, Validators.minLength(5)]),
-      "last_Name" : new FormControl('',Validators.required),
+      "first_Name" : new FormControl('',[Validators.required, Validators.minLength(this.validator.minLengths.nameLength)]),
+      "last_Name" : new FormControl('',[Validators.required,  Validators.minLength(this.validator.minLengths.nameLength)]),
+      "email": new FormControl(this.utilsService.getEmail(),Validators.required),
       "location": new FormControl('',Validators.required),
       "description": new FormControl('',Validators.required),
     });
-    console.log(this.DetailsEditForm)
+    this.DetailsEditForm.controls["email"].disable();
   }
   onEditDetails(){
    

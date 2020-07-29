@@ -48,3 +48,11 @@
   .cursor-pointer{
     cursor: pointer;
   }
+
+  .position-absolute{
+    position: absolute;
+  }
+
+  .position-relative{
+    position: relative;
+  }

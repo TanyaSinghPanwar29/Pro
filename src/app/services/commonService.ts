@@ -7,20 +7,15 @@ import { Subject } from 'rxjs';
     providedIn: 'root'
 })
 export class CommonService{
-    public userPassword = new Subject() 
+    
     constructor(
         private http: HttpClient
     ){}
    
+
     makePostRequest = (url,body) => {
         let fullUrl = BaseURL.url + url;
         return this.http.post(fullUrl,body);
      }
 
-    editDetails = (url,body) =>{
-        let fullUrl = BaseURL.url + url
-        return this.http.post(fullUrl,body)
-    }  
-
-    
 }

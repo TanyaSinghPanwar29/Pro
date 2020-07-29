@@ -19,20 +19,50 @@ export class Validator{
             required: "Password is required",
             incorrect: "Password is incorrect",
             notAMatch: "Passwords does'nt match."
+         },
+         name:{
+             required:"Name is required",
+             short: "Name is too short"
+         },
+         location:{
+             required: "Location is required",
          }
+
         }
      minLengths = {
          password: 6,
-         phone: 1000000000
-
+         phone: 1000000000,
+         nameLength: 3
      }
+
      getErrorMessage = (control,type: string)=>{
         switch(type){
             case 'email':
                return this.getEmailErrorMessage(control);
             case 'password':
                 return this.getPasswordErrorMessage(control);  
+            case 'name':
+                return this.getNameErrorMessage(control); 
+            case 'location':
+                return this.getLocaltionErrorMessage(control);      
         }
+    }
+
+    getLocaltionErrorMessage = (control: FormControl ) =>{
+        let value = control.value;
+         if((control.touched || control.dirty) && !value && control.invalid){
+             return this.errorMessages.location.required;
+         }
+    }
+    getNameErrorMessage = (control: FormControl)=>{
+        let value = control.value;
+        if((control.touched || control.dirty) && !value && control.invalid){
+            return this.errorMessages.name.required;
+        }
+        if((control.touched || control.dirty) && value && value.toString().length <= this.minLengths.nameLength){
+            return this.errorMessages.name.short;
+        }
+        
     }
     getEmailErrorMessage = (control: FormControl)=>{
         let value = control.value;

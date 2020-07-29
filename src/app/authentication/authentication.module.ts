@@ -7,7 +7,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { ProfileComponent } from './profile/profile.component';
 import { TextmsgComponent } from './textmsg/textmsg.component';
 import { DetailsEditComponent } from './details-edit/details-edit.component';
-
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [LoginComponent, SignUpComponent, ProfileComponent, TextmsgComponent, DetailsEditComponent],
@@ -15,7 +15,8 @@ import { DetailsEditComponent } from './details-edit/details-edit.component';
     CommonModule,
     AuthenticationRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    RouterModule
   ]
 })
 export class AuthenticationModule { }

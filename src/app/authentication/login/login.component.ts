@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
     "password": new FormControl('', [Validators.required, Validators.minLength(this.validator.minLengths.password)]),
   });
 
-
+ 
 
   login() {
 
@@ -44,6 +44,7 @@ export class LoginComponent implements OnInit {
       email: this.loginForm.value.email,
       password: this.loginForm.value.password
     }
+   
     if (this.loginForm.invalid)
       return;
     this.commonService.makePostRequest(ApplicationURLs.login, Body).subscribe(
@@ -55,11 +56,15 @@ export class LoginComponent implements OnInit {
         
         if(res.success){
           this.utilsService.setToken(res.token);
+          this.utilsService.setEmail(Body.email)
           if(res.isUpdated){
             this.router.navigateByUrl('textmsg');
           } 
           else if(!res.isUpdated){
-            this.router.navigateByUrl('details-edit');
+            this.router.navigate(['details-edit',{
+              heading: 'TELL US MORE ABOUT YOURSELF',
+              button: 'SAVE'
+            }]);
           }
         }
       }
