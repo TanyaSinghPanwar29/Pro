@@ -1,14 +1,31 @@
-
-
 <div class="textarea">
     <div class="contact">
         <div class="search-section">
-           <img class="viewprofile" src="./assets/menu_btn.svg"> 
-           <input class="searchbox" type="search" placeholder="Search for new friends..">
+            <img class="viewprofile" src="./assets/menu_btn.svg">
+            <input type="search" class="searchbox" placeholder="Search for new friends..." [(ngModel)]="search"
+                (input)="onSearch(search)" />
         </div>
+        <div *ngIf="this.showSearchResults">
+            <div class="search-result" *ngFor="let resArray of resArrays">
+                <div class="search-result-img">
+                    <img src={{resArray?.src}}>
+                </div>
+                <div class="search-result-info">
+                    <span class="username">{{resArray?.username}}</span>
+                    <span class="description">{{resArray?.description}}</span>
+                </div>
+            </div>
+        </div>
+        
+
     </div>
 
     <div class="message">
-        
+        <div *ngFor="let msgArray of messageArray">
+            {{msgArray}}
+        </div>
+        <input type="text" [(ngModel)]="message">
+        <button class="btn btn-primary" (click)="sendMessages()"> SEND </button>
+
     </div>
 </div>

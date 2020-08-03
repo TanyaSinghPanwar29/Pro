@@ -51,6 +51,7 @@
 }
 #email{
     background-image: url('src/assets/mail-icon.svg');
+    background-size: 18px;
 }
 .mytext3{
     margin-top: 10px; 
@@ -80,6 +81,7 @@
 #password{
     background-image: url('src/assets/password-icon.svg');
 }
+
 .btn{
     width: 270px;
     margin-bottom: 60px;
@@ -87,4 +89,9 @@
     height: 45px;
     border: none;
     background-color: var(--primary-color);
+}
+
+#username{
+    background-image: url("./../../../assets/username-icon.svg");
+    background-size: 17px;
 }

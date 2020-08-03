@@ -23,6 +23,29 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.buildForm();
+  }
+
+  validateUsername = (control: FormControl) => {
+    let value = control.value +"";
+    if(!value)
+    return null;
+
+    if((value.includes('.') || value.includes('#') || value.includes('$') || value.includes('[') || value.includes(']')) )
+     return {
+       valid: false
+     };
+
+     return null;
+}
+
+
+  buildForm = () => {
+    this.loginForm = new FormGroup({
+      "username": new FormControl('', [Validators.required, this.validateUsername]),
+      "password": new FormControl('', [Validators.required, Validators.minLength(this.validator.minLengths.password)]),
+      "login-button": new FormControl()
+    });
   }
 
   navigateToSignUp() {
@@ -30,19 +53,14 @@ export class LoginComponent implements OnInit {
   }
   public validator: Validator = new Validator();
 
-  loginForm: FormGroup = new FormGroup({
-    "email": new FormControl('', [Validators.required, Validators.pattern(this.validator.emailRegex)]),
-    "password": new FormControl('', [Validators.required, Validators.minLength(this.validator.minLengths.password)]),
-    "login-button": new FormControl()
-  });
-
- 
+  loginForm: FormGroup;
+  
 
   login() {
     this.loginForm.markAllAsTouched();
     this.loginForm.markAsDirty();
     let Body = {
-      email: this.loginForm.value.email,
+      username: this.loginForm.value.username,
       password: this.loginForm.value.password
     }
    
@@ -60,7 +78,8 @@ export class LoginComponent implements OnInit {
         
         if(res.success){
           this.utilsService.setToken(res.token);
-          this.utilsService.setEmail(Body.email)
+          this.utilsService.setUserName(Body.username);
+          this.utilsService.setEmail(res.email)
           if(res.isUpdated){
             this.router.navigateByUrl('textmsg');
           } 

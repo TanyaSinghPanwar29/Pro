@@ -16,7 +16,7 @@ export class DetailsEditComponent implements OnInit {
   DetailsEditForm: FormGroup;
   screenParameters: any;
   validator: Validator = new Validator();
-  constructor( public commonService: CommonService , private utilsService : UtilsService, private route: ActivatedRoute) {
+  constructor( public commonService: CommonService , private utilsService : UtilsService, private route: ActivatedRoute, private router: Router) {
      
    }
 
@@ -35,13 +35,11 @@ export class DetailsEditComponent implements OnInit {
       "last_Name" : new FormControl('',[Validators.required,  Validators.minLength(this.validator.minLengths.nameLength)]),
       "email": new FormControl(this.utilsService.getEmail(),Validators.required),
       "location": new FormControl('',Validators.required),
-      "description": new FormControl('',Validators.required),
+      "description": new FormControl('',Validators.required)
     });
     this.DetailsEditForm.controls["email"].disable();
   }
   onEditDetails(){
-   
-
     this.DetailsEditForm.markAllAsTouched();
     this.DetailsEditForm.markAsDirty();
 
@@ -53,11 +51,13 @@ export class DetailsEditComponent implements OnInit {
       "last_Name" :  this.DetailsEditForm.value.last_Name,
       "location":  this.DetailsEditForm.value.location,
       "description":  this.DetailsEditForm.value.description,
-      "token": this.utilsService.getToken()
+      // "token": this.utilsService.getToken(),
+      "username": this.utilsService.getUserName()
     }
   
       this.commonService.makePostRequest(ApplicationURLs.EditDetails ,body).subscribe(res =>{
       console.log(res)
+      this.router.navigate(['/textmsg'])
     })
 
   

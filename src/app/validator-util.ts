@@ -26,6 +26,10 @@ export class Validator{
          },
          location:{
              required: "Location is required",
+         },
+         userName:{
+             required: "user_Name is required",
+             inappropriate :"Inappropriate user_Name"
          }
 
         }
@@ -44,12 +48,26 @@ export class Validator{
             case 'name':
                 return this.getNameErrorMessage(control); 
             case 'location':
-                return this.getLocaltionErrorMessage(control);      
+                return this.getLocaltionErrorMessage(control);    
+            case 'user_name':
+                return this.getuserNameErrorMessage(control);      
         }
     }
+    getuserNameErrorMessage = (control : FormControl )  =>{
+        let value = control.value;
+        if((control.dirty || control.touched) && !value && control.invalid ){
+            return this.errorMessages.userName.required;
+        }
+        if((control.touched || control.dirty) && value && (value.includes('.') || value.includes('#') || value.includes('$') || value.includes('[') || value.includes(']'))){
+            return this.errorMessages.userName.inappropriate;
+        }
+    }
+        
+
 
     getLocaltionErrorMessage = (control: FormControl ) =>{
         let value = control.value;
+       
          if((control.touched || control.dirty) && !value && control.invalid){
              return this.errorMessages.location.required;
          }

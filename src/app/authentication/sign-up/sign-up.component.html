@@ -4,37 +4,49 @@
             <img src="./assets/Logo-Low-Opacity.svg">
             <div class="logo-message">
                 <span class="mytext">WELCOME TO CHAT HUB</span>
-                <p class="mytext1">Join our  community to spend a quality time with your knowns.</p>
+                <p class="mytext1">Join our community to spend a quality time with your knowns.</p>
             </div>
         </div>
     </div>
     <div class="white-region">
         <div class="signup-container">
-        <img src="./assets/Logo.svg">
-        <h2 class="mytext2">JOIN US</h2>
-        <form [formGroup]="signUpForm">
-        <div class="input-container">
-                <div class="su-input" >
-                    <input [ngClass]="{'redBorder': this.validator.getErrorMessage(this.signUpForm.get('email'),'email')}"
-                           formControlName="email" class="mytext2 input-field" placeholder="EMAIL" type="email" id="email" name="email">
-                    <p class="errorMessage">{{ this.validator.getErrorMessage(this.signUpForm.get('email'),'email') }}</p>
+            <img src="./assets/Logo.svg">
+            <h2 class="mytext2">JOIN US</h2>
+            <form [formGroup]="signUpForm">
+                <div class="input-container">
+                    <div class="su-input">
+                        <input
+                            [ngClass]="{'redBorder':  this.validator.getErrorMessage(this.signUpForm.get('user_name'),'user_name')}"
+                            formControlName="user_name" class="mytext2 input-field" type="text"
+                            placeholder="USER NAME" id="username" name="password">
+                        <p class="errorMessage">
+                            {{  this.validator.getErrorMessage(this.signUpForm.get('user_name'),'user_name') }}
+                        </p>
+                    </div>
+                    <div class="su-input">
+                        <input
+                            [ngClass]="{'redBorder': this.validator.getErrorMessage(this.signUpForm.get('email'),'email')}"
+                            formControlName="email" class="mytext3 input-field" placeholder="EMAIL" type="email"
+                            id="email" name="email">
+                        <p class="errorMessage">
+                            {{ this.validator.getErrorMessage(this.signUpForm.get('email'),'email') }}</p>
+                    </div>
+                    <div class="su-input">
+                        <input
+                            [ngClass]="{'redBorder': this.validator.getErrorMessage(this.signUpForm.get('password'),'password')}"
+                            formControlName="password" class="mytext3 input-field" type="password"
+                            placeholder="PASSWORD" id="password" name="password">
+                        <p class="errorMessage">
+                            {{ this.validator.getErrorMessage(this.signUpForm.get('password'),'password') }}</p>
+                    </div>
+            
+
                 </div>
-                <div class="su-input">
-                    <input [ngClass]="{'redBorder': this.validator.getErrorMessage(this.signUpForm.get('password'),'password')}"
-                    formControlName="password" class="mytext3 input-field" type="password" placeholder="PASSWORD" id="password" name="password">
-                    <p class="errorMessage">{{ this.validator.getErrorMessage(this.signUpForm.get('password'),'password') }}</p>
-                </div>
-                <div class="su-input">
-                    <input [ngClass]="{'redBorder': this.validator.getConfirmPasswordErrorMessage(this.signUpForm.get('password'),this.signUpForm.get('confirm_password'))}"
-                    formControlName="confirm_password" class="mytext3 input-field" type="password" placeholder="CONFIRM PASSWORD" id="password" name="password">   
-                    <p class="errorMessage">{{  this.validator.getConfirmPasswordErrorMessage(this.signUpForm.get('password'),this.signUpForm.get('confirm_password')) }}</p>
-                </div>
-               
+            </form>
+            <button (click)="this.signUp()" class="btn cursor-pointer btn-primary"><b class="mytext1">Sign
+                    Up</b></button>
+            <p class="mytext4">Already a user? <span (click)="this.navigateToSignIn()">LOGIN</span></p>
         </div>
-        </form>
-        <button (click)="this.signUp()" class="btn cursor-pointer btn-primary"><b class="mytext1">Sign Up</b></button>
-        <p class="mytext4">Already a user? <span (click)="this.navigateToSignIn()">LOGIN</span></p>
-    </div>
 
     </div>
 

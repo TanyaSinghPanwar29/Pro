@@ -15,9 +15,9 @@
         <form [formGroup]="loginForm">
         <div class="input-container">
                 <div class="su-input" >
-                    <input [ngClass]="{'redBorder': this.validator.getErrorMessage(this.loginForm.get('email'),'email')}"
-                           formControlName="email" class="mytext2 input-field" placeholder="EMAIL" type="email" id="email" name="email">
-                    <p class="errorMessage">{{ this.validator.getErrorMessage(this.loginForm.get('email'),'email') }}</p>
+                    <input [ngClass]="{'redBorder': this.validator.getErrorMessage(this.loginForm.get('username'),'username')}"
+                           formControlName="username" class="mytext2 input-field" placeholder="USER NAME" type="text" id="username" name="email">
+                    <p class="errorMessage">{{ this.validator.getErrorMessage(this.loginForm.get('username'),'username') }}</p>
                 </div>
                 <div class="su-input">
                     <input [ngClass]="{'redBorder': this.validator.getErrorMessage(this.loginForm.get('password'),'password')}"

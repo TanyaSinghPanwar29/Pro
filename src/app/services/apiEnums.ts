@@ -5,7 +5,8 @@ export enum BaseURL {
 export enum ApplicationURLs  {
     signUp = "api/createUser",
     login ="api/signIn",
-    EditDetails = "api/update-profile"
+    EditDetails = "api/update-profile",
+    search = "api/search"
 }
 
 

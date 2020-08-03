@@ -6,8 +6,12 @@
     display: flex;
 }
 .su-input p {
+    
     margin: 5px 0 0 0;
 }
+/* .btn-primary{
+    background-image: url('../../../assets/loader.gif');
+} */
 .disabled-auth-btn{
     background-color: rgba(3, 94, 230,0.6) !important;
 }
@@ -92,4 +96,8 @@
 }
 .login-btn{
     margin-bottom: 60px;
+}
+#username{
+    background-image: url("./../../../assets/username-icon.svg");
+    background-size: 17px;
 }

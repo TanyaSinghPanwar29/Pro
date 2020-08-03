@@ -29,9 +29,9 @@ export class SignUpComponent implements OnInit {
   
   buildForm = () => {
     this.signUpForm = new FormGroup({
+      "user_name": new FormControl('',[Validators.required,this.validateUsername]),
       "email": new FormControl('',[Validators.required,Validators.pattern(this.validator.emailRegex)]),
-      "password": new FormControl('',[Validators.required,Validators.minLength(this.validator.minLengths.password)]),
-      "confirm_password": new FormControl('',[Validators.required,this.confirmPasswordValidator])
+      "password": new FormControl('',[Validators.required,Validators.minLength(this.validator.minLengths.password)])
     }); 
   }
 
@@ -39,10 +39,20 @@ export class SignUpComponent implements OnInit {
     this.router.navigateByUrl('login')
   }
 
-  signUp = () => {
+  validateUsername = (control: FormControl) => {
+      let value = control.value +"";
+      if(!value)
+      return null;
 
-    
-    
+      if((value.includes('.') || value.includes('#') || value.includes('$') || value.includes('[') || value.includes(']')) )
+       return {
+         valid: false
+       };
+
+       return null;
+  }
+
+  signUp = () => {
     this.signUpForm.markAllAsTouched();
     this.signUpForm.markAsDirty();
     
@@ -50,38 +60,18 @@ export class SignUpComponent implements OnInit {
     return;
 
     let body = {
+      username: this.signUpForm.get('user_name').value,
       email: this.signUpForm.get('email').value,
       password: this.signUpForm.get('password').value,
-      
     }
-    console.log(body)
     this.commonService.makePostRequest(ApplicationURLs.signUp,body).subscribe((res:any)=>{
-      console.log(res,"MUBARAK HO!")
       if(res.success){
         this.router.navigateByUrl('login')
       } else{
         //TO DO
       }
-    });
-    
-    
+    });    
   }
-  confirmPasswordValidator = (control: FormControl) => {
-    if(!this.signUpForm)
-    return;
-    
-    let password = this.signUpForm.get('password').value.toString();
-    let confirmPassword = control.value.toString();
-    if(!password || !confirmPassword)
-    return null;
-
-    if (password !== confirmPassword){
-      return {
-        valid: false
-      }
-    }
-
-    return null;
-  }
+  
 
 }
