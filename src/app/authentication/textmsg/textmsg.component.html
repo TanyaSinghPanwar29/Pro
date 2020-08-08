@@ -1,12 +1,12 @@
 <div class="textarea">
     <div class="contact">
         <div class="search-section">
-            <img class="viewprofile" src="./assets/menu_btn.svg">
+            <img class="viewprofile" src="./assets/menu_btn.svg" (click)="opensidebar()">
             <input type="search" class="searchbox" placeholder="Search for new friends..." [(ngModel)]="search"
                 (input)="onSearch(search)" />
         </div>
         <div *ngIf="this.showSearchResults">
-            <div class="search-result" *ngFor="let resArray of resArrays">
+            <div class="search-result" *ngFor="let resArray of resArrays" (click)="getuserinfo(resArray?.username)">
                 <div class="search-result-img">
                     <img src={{resArray?.src}}>
                 </div>
@@ -16,10 +16,26 @@
                 </div>
             </div>
         </div>
-        
+    </div>
+    <div class="sidebar" [ngClass]="{'open-side-bar': this.showSideBar}" id="sidebarid">
+        <div class="chevron"><img src="../assets/chevron-left-solid.svg" (click)="hideSideBar()"></div>
+
+        <div class="sidebar-profile-img">
+            <div class="sidebar-image"><img src="../assets/default.png"></div>
+            <div class="user-name" >
+                <span class="name">FirstName LastName</span>
+                <span class="desp">Description...</span>
+            </div>
+        </div>
+
+        <div class="icons">
+         <div class="profile"><img src="../assets/user-circle-solid.svg"><span (click)="goToProfile()">PROFILE</span></div>
+        <div class="logout"><img src="../assets/sign-out-alt-solid.svg"><span (click)="goToSignOut()">SIGN OUT</span></div>
+        </div>
+
+
 
     </div>
-
     <div class="message">
         <div *ngFor="let msgArray of messageArray">
             {{msgArray}}

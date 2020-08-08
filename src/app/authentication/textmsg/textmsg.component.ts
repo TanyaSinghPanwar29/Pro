@@ -3,6 +3,7 @@ import * as io from 'socket.io-client';
 import { BaseURL, ApplicationURLs } from 'src/app/services/apiEnums';
 import { UtilsService } from 'src/app/services/utils.service';
 import { CommonService } from 'src/app/services/commonService';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-textmsg',
   templateUrl: './textmsg.component.html',
@@ -11,8 +12,10 @@ import { CommonService } from 'src/app/services/commonService';
 export class TextmsgComponent implements OnInit {
   public socket; 
   search : string;
+  sidebarid: string;
   showSearchResults : boolean = false;
-  constructor(private utilsService: UtilsService,private commonService: CommonService) { 
+  showSideBar : boolean = false;
+  constructor(private utilsService: UtilsService,private router : Router,private commonService: CommonService) { 
     this.connect();
   }
   message: string;
@@ -25,7 +28,32 @@ export class TextmsgComponent implements OnInit {
 
     })
 }
+hideSideBar(){
+  this.showSideBar = false
+}
 
+opensidebar(){
+  this.showSideBar =true
+}
+
+goToProfile(){
+  this.router.navigate(['/profile',{
+    selfProfile: true,
+    username:this.utilsService.getUserName()
+  }])
+}
+
+goToSignOut(){
+  localStorage.clear();
+  this.router.navigate(['/login'])
+}
+
+getuserinfo(username){
+ this.router.navigate(['/profile',{
+   username: username,
+   selfProfile: false
+ }])
+}
 onSearch(search: string){
   if(search.length <= 2){
     this.showSearchResults = false;
@@ -36,9 +64,8 @@ onSearch(search: string){
     text: search
   }
     this.commonService.makePostRequest(ApplicationURLs.search,body).subscribe((res:any) =>{
-      console.log(res.search_results)
       this.resArrays = res.search_results
-      console.log(this.resArrays)
+     
     })
 }
 

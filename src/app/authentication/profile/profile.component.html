@@ -1,10 +1,10 @@
 <div class="profiles">
   
     <div class="blueregion">
-       <div class="edit-profile">
+       <div class="edit-profile" *ngIf="">
         <img (click)="onEditProfile()" src="./assets/edit-regular.svg">
         
-        </div>
+        </div> 
         <div class="profilecontainer">
             
          
@@ -12,12 +12,12 @@
                 <img class="edit-icon" src="./assets/Profile Edit Icon.svg">
                 <img class="profile-pic" src="https://images.unsplash.com/photo-1513721032312-6a18a42c8763?w=152&h=152&fit=crop&crop=faces" alt="">
              </div>
-             <div class="profile-name"><span>Angrejan</span></div>
+             <div class="profile-name"><span>{{this.profileDetails.first_Name}}</span></div>
               <div class="info">
                   <div class="info-container">
                       <div class="info-labels">
                         <span class="info-label">Email</span>
-                        <span class="info-content">angrejan@gmail.com</span>
+                        <span class="info-content">{{this.profileDetails.email}}</span>
                       </div>
                       <!-- <div class="info-edit">
                         <span>Edit</span>
@@ -26,7 +26,7 @@
                   <div class="info-container">
                     <div class="info-labels">
                       <span class="info-label">Location</span>
-                      <span class="info-content">Delhi</span>
+                      <span class="info-content">{{this.profileDetails.location}}</span>
                     </div>
                     <!-- <div class="info-edit">
                       <span>Edit</span>
@@ -35,7 +35,7 @@
                 <div class="info-container">
                     <div class="info-labels">
                       <span class="info-label">Description</span>
-                      <div class="info-content info-desc">This is a very long description that requires ellipsis.</div>
+                      <div class="info-content info-desc">{{this.profileDetails.description}}</div>
                     </div>
                     <!-- <div class="info-edit">
                       <span>Edit</span>
@@ -43,11 +43,16 @@
                 </div>
               </div>
               <div class="profile-options">
-                  <div class="btn btn-message">
+                  <div class="btn btn-message" *ngIf="this.profileParams?.selfProfile" >
                       <img src="./assets/Message Button Icon.svg"> 
-                      <span>Message</span> 
+                      <span>Messages</span> 
                   </div>
-                  <div class="btn btn-connect"> 
+                  <div class="btn btn-message" *ngIf="!this.profileParams?.selfProfile" >
+                    <img src="./assets/Message Button Icon.svg"> 
+                    <span>Messages</span> 
+                </div>
+                  <div class="btn btn-connect" 
+                  *ngIf="!this.profileParams?.selfProfile && !this.profileParams?.notAContact"> 
                       <img src="./assets/Connect Icon.svg">
                       <span>Connect</span> 
                 </div>
@@ -56,7 +61,7 @@
     </div>
     <div class="whiteregion">
           <div class="collection-heading">
-              <span>Angrejan's Collection</span>
+              <span>{{this.profileDetails.first_Name}}'s Collection</span>
           </div>
           <div class="post-container">
             <div class="post-img"><img src="../../../assets/Harry Potter/1.jpg"></div>
