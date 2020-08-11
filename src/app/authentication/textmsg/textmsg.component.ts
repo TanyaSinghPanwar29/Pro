@@ -28,6 +28,12 @@ export class TextmsgComponent implements OnInit {
 
     })
 }
+
+closeSearchResults = () => {
+  this.showSearchResults = false;
+  this.search = '';
+}
+
 hideSideBar(){
   this.showSideBar = false
 }
