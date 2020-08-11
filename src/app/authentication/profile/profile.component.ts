@@ -31,6 +31,10 @@ export class ProfileComponent implements OnInit {
     // this.commonService.makePostRequest(ApplicationURLs.profileInfo,body)
   }
 
+  navigateTo = (path: string) => {
+    this.router.navigateByUrl(path);
+  }
+
   setRouteParams = () => {
       this.routeParams.params.subscribe((params)  => {
         this.profileParams = params;

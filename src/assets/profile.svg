@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="604" height="584" viewBox="0 0 604 584">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_1" data-name="Rectangle 1" width="604" height="584" transform="translate(-0.354 -0.476)" fill="#fff"/>
+    </clipPath>
+    <clipPath id="clip-path-2">
+      <ellipse id="Ellipse_4" data-name="Ellipse 4" cx="282" cy="281.5" rx="282" ry="281.5" transform="translate(-0.476 0.403)" fill="#fff"/>
+    </clipPath>
+  </defs>
+  <g id="abstract-user-flat-4" transform="translate(0.354 0.476)">
+    <g id="Group_2" data-name="Group 2" clip-path="url(#clip-path)">
+      <path id="Path_1" data-name="Path 1" d="M282,0C437.744,0,564,126.032,564,281.5S437.744,563,282,563,0,436.968,0,281.5,126.256,0,282,0Z" transform="translate(19.646 20.524)" fill="#cacaca"/>
+    </g>
+    <circle id="Ellipse_2" data-name="Ellipse 2" cx="116" cy="116" r="116" transform="translate(185.646 115.524)" fill="#fff"/>
+    <g id="Group_3" data-name="Group 3" transform="translate(20.122 20.122)" clip-path="url(#clip-path-2)">
+      <circle id="Ellipse_3" data-name="Ellipse 3" cx="206" cy="206" r="206" transform="translate(75.524 327.403)" fill="#fff"/>
+    </g>
+  </g>
+</svg>
