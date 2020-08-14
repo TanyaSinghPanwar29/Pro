@@ -10,8 +10,9 @@ export enum ApplicationURLs  {
     EditDetails = "api/update-profile",
     search = "api/search",
     userInfo = "api/userInfo",
-    connect = "/api/friendRequest"
-
+    connect = "api/friendRequest",
+    userStatus="api/userStatus",
+    handleFriendRequest = 'api/handleFriendRequest'
 }
 
 

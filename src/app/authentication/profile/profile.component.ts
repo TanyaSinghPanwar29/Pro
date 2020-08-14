@@ -3,6 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { CommonService } from 'src/app/services/commonService';
 import { ApplicationURLs } from 'src/app/services/apiEnums';
 import { UtilsService } from 'src/app/services/utils.service';
+import { stat } from 'fs';
+import { TypeScriptEmitter } from '@angular/compiler';
 
 @Component({
   selector: 'app-profile',
@@ -15,6 +17,7 @@ export class ProfileComponent implements OnInit {
   profileInfo: any;
   toggleConnectButton = false
   profileDetails;
+  contactStatus: Object;
   constructor
   (private router: Router,
   private routeParams: ActivatedRoute,
@@ -23,7 +26,12 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.setRouteParams();
-
+    if(this.profileParams){
+      if(this.profileParams.selfProfile == 'false'){
+        this.getContactStatus();
+      }
+    }
+    
   }
  
   navigateTo = (path: string) => {
@@ -34,9 +42,6 @@ export class ProfileComponent implements OnInit {
       this.routeParams.params.subscribe((params)  => {
         this.profileParams = params;
         this.getUserProfileInfo(params.username);
-        if(!this.profileParams.selfProfile){
-          this.getContactStatus();
-        }
       })
   }
 
@@ -45,13 +50,15 @@ export class ProfileComponent implements OnInit {
       sender: this.util.getUserName(),
       receiver: this.profileParams.username
     }
-    
+    this.commonService.makePostRequest(ApplicationURLs.userStatus,requestPayload)
+    .subscribe((res) => {
+      this.contactStatus = res;
+    })
   }
 
   getUserProfileInfo(username){
     console.log(username)
      this.commonService.makeGetRequest(ApplicationURLs.userInfo, username).subscribe((res) =>{
-       console.log(res)
        this.profileDetails = res;
      })
   }
@@ -66,11 +73,32 @@ export class ProfileComponent implements OnInit {
     
     var connect_payload={
       sender: this.util.getUserName(),
-      reciever: this.profileParams
+      receiver: this.profileParams.username
     }
     this.commonService.makePostRequest(ApplicationURLs.connect, connect_payload).subscribe((res) =>{
-      console.log(res)
+      this.setContactStatus('request_sent');
     })
+  }
+
+  friendRequestStatus = (status) => {
+    let request = {
+      sender: this.profileParams.username,
+      receiver: this.util.getUserName(),
+      accepted: (status === 1) ? true : false
+    }
+    this.commonService.makePostRequest(ApplicationURLs.handleFriendRequest,request)
+    .subscribe((res) => {
+      this.contactStatus = {};
+      this.contactStatus[(status === 1) ? 
+        'already_a_contact' : 
+        'not_a_contact'
+      ] = true;
+    })
+  }
+
+  setContactStatus = (status) => {
+    this.contactStatus = {};
+    this.contactStatus[status] = true;
   }
 
 }

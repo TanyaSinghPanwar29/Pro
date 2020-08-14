@@ -47,17 +47,36 @@
                     <img src="./assets/Message Button Icon.svg"> 
                     <span>Messages</span> 
                 </div>
-                <!-- <div class="btn btn-message" *ngIf="!this.profileParams?.selfProfile" (click)="this.navigateTo('textmsg')">
-                  <img src="./assets/Message Button Icon.svg"> 
-                  <span>Message</span> 
-                </div> -->
                 <div class="profile-btn-container">
                   <div class="btn btn-connect"
-                       *ngIf="this.profileParams?.selfProfile == 'false'"
+                       *ngIf="this.contactStatus?.not_a_contact && this.profileParams?.selfProfile == 'false'"
                        (click)="connect()"> 
                       <img src="./assets/Connect Icon.svg">
                       <span>Connect</span> 
                 </div>
+                <div class="btn btn-connect"
+                       *ngIf="this.contactStatus?.request_sent && this.profileParams?.selfProfile == 'false'"
+                       > 
+                      <img src="./assets/Connect Icon.svg">
+                      <span>Requested</span> 
+                </div>
+                <div class="btn btn-message" 
+                *ngIf="this.contactStatus?.already_a_contact && this.profileParams?.selfProfile == 'false'" (click)="this.navigateTo('textmsg')">
+                  <img src="./assets/Message Button Icon.svg"> 
+                  <span>Text</span> 
+              </div>
+
+              <div 
+              *ngIf="this.contactStatus?.request_received && this.profileParams?.selfProfile == 'false'"
+              class="accept-reject-friend-requests">
+                <div class="request-options">
+                  <img src="../../../assets/tick.svg" (click)="friendRequestStatus(1)">
+                    <span>Friend Request</span>
+                  <img src="../../../assets/cross.svg" (click)="friendRequestStatus(0)">
+                </div>
+                
+              </div>
+
                 </div>
                 
             </div>
