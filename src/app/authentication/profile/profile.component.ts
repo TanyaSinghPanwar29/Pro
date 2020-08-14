@@ -13,6 +13,7 @@ export class ProfileComponent implements OnInit {
 
   profileParams: any;
   profileInfo: any;
+  toggleConnectButton = false
   profileDetails;
   constructor
   (private router: Router,
@@ -22,15 +23,9 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.setRouteParams();
-    this.getProfileData();
-  }
-  getProfileData = () => {
-    let body = {
-      token: this.util.getToken()
-    }
-    // this.commonService.makePostRequest(ApplicationURLs.profileInfo,body)
-  }
 
+  }
+ 
   navigateTo = (path: string) => {
     this.router.navigateByUrl(path);
   }
@@ -38,9 +33,19 @@ export class ProfileComponent implements OnInit {
   setRouteParams = () => {
       this.routeParams.params.subscribe((params)  => {
         this.profileParams = params;
-       console.log(this.profileParams.selfProfile)
-        this.getUserProfileInfo(params.username)
+        this.getUserProfileInfo(params.username);
+        if(!this.profileParams.selfProfile){
+          this.getContactStatus();
+        }
       })
+  }
+
+  getContactStatus(){
+    let requestPayload = {
+      sender: this.util.getUserName(),
+      receiver: this.profileParams.username
+    }
+    
   }
 
   getUserProfileInfo(username){
@@ -55,6 +60,17 @@ export class ProfileComponent implements OnInit {
       heading: "EDIT YOUR PROFILE",
       button:"UPDATE"
    }])
+  }
+
+  connect(){
+    
+    var connect_payload={
+      sender: this.util.getUserName(),
+      reciever: this.profileParams
+    }
+    this.commonService.makePostRequest(ApplicationURLs.connect, connect_payload).subscribe((res) =>{
+      console.log(res)
+    })
   }
 
 }
