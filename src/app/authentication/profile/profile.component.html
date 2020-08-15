@@ -5,82 +5,85 @@
       <img (click)="onEditProfile()" src="./assets/edit-regular.svg">
       
       </div> 
-      <div class="profilecontainer">
+      <div class="profile-parent">
+        <div class="profilecontainer">
           
        
-           <div class="profileimg">
-              <img *ngIf="this.profileParams.selfProfile == 'true'" class="edit-icon" src="./assets/Profile Edit Icon.svg" >
-              <img class="profile-pic" src="https://images.unsplash.com/photo-1513721032312-6a18a42c8763?w=152&h=152&fit=crop&crop=faces" alt="">
+          <div class="profileimg">
+             <img *ngIf="this.profileParams.selfProfile == 'true'" class="edit-icon" src="./assets/Profile Edit Icon.svg" >
+             <img class="profile-pic" src="https://images.unsplash.com/photo-1513721032312-6a18a42c8763?w=152&h=152&fit=crop&crop=faces" alt="">
+          </div>
+          <div class="profile-name"><span>{{this.profileDetails?.first_Name}}</span></div>
+           <div class="info">
+               <div class="info-container">
+                   <div class="info-labels">
+                     <span class="info-label">Email</span>
+                     <span class="info-content">{{this.profileDetails?.email}}</span>
+                   </div>
+                   <!-- <div class="info-edit">
+                     <span>Edit</span>
+                   </div> -->
+               </div>
+               <div class="info-container">
+                 <div class="info-labels">
+                   <span class="info-label">Location</span>
+                   <span class="info-content">{{this.profileDetails?.location}}</span>
+                 </div>
+                 <!-- <div class="info-edit">
+                   <span>Edit</span>
+                 </div> -->
+             </div>
+             <div class="info-container">
+                 <div class="info-labels">
+                   <span class="info-label">Description</span>
+                   <div class="info-content info-desc">{{this.profileDetails?.description}}</div>
+                 </div>
+                 <!-- <div class="info-edit">
+                   <span>Edit</span>
+                 </div> -->
+             </div>
            </div>
-           <div class="profile-name"><span>{{this.profileDetails?.first_Name}}</span></div>
-            <div class="info">
-                <div class="info-container">
-                    <div class="info-labels">
-                      <span class="info-label">Email</span>
-                      <span class="info-content">{{this.profileDetails?.email}}</span>
-                    </div>
-                    <!-- <div class="info-edit">
-                      <span>Edit</span>
-                    </div> -->
-                </div>
-                <div class="info-container">
-                  <div class="info-labels">
-                    <span class="info-label">Location</span>
-                    <span class="info-content">{{this.profileDetails?.location}}</span>
-                  </div>
-                  <!-- <div class="info-edit">
-                    <span>Edit</span>
-                  </div> -->
-              </div>
-              <div class="info-container">
-                  <div class="info-labels">
-                    <span class="info-label">Description</span>
-                    <div class="info-content info-desc">{{this.profileDetails?.description}}</div>
-                  </div>
-                  <!-- <div class="info-edit">
-                    <span>Edit</span>
-                  </div> -->
-              </div>
-            </div>
-            <div class="profile-options">
-                <div class="btn btn-message" *ngIf="this.profileParams?.selfProfile == 'true'" (click)="this.navigateTo('textmsg')">
-                    <img src="./assets/Message Button Icon.svg"> 
-                    <span>Messages</span> 
-                </div>
-                <div class="profile-btn-container">
-                  <div class="btn btn-connect"
-                       *ngIf="this.contactStatus?.not_a_contact && this.profileParams?.selfProfile == 'false'"
-                       (click)="connect()"> 
-                      <img src="./assets/Connect Icon.svg">
-                      <span>Connect</span> 
-                </div>
-                <div class="btn btn-connect"
-                       *ngIf="this.contactStatus?.request_sent && this.profileParams?.selfProfile == 'false'"
-                       > 
-                      <img src="./assets/Connect Icon.svg">
-                      <span>Requested</span> 
-                </div>
-                <div class="btn btn-message" 
-                *ngIf="this.contactStatus?.already_a_contact && this.profileParams?.selfProfile == 'false'" (click)="this.navigateTo('textmsg')">
-                  <img src="./assets/Message Button Icon.svg"> 
-                  <span>Text</span> 
-              </div>
+           <div class="profile-options">
+               <div class="btn btn-message" *ngIf="this.profileParams?.selfProfile == 'true'" (click)="this.navigateTo('textmsg')">
+                   <img src="./assets/Message Button Icon.svg"> 
+                   <span>Messages</span> 
+               </div>
+               <div class="profile-btn-container">
+                 <div class="btn btn-connect"
+                      *ngIf="getStatusFlag('not_a_contact') && this.profileParams?.selfProfile == 'false'"
+                      (click)="connect()"> 
+                     <img src="./assets/Connect Icon.svg">
+                     <span>Connect</span> 
+               </div>
+               <div class="btn btn-connect"
+                      *ngIf="getStatusFlag('request_sent') && this.profileParams?.selfProfile == 'false'"
+                      > 
+                     <img src="./assets/Connect Icon.svg">
+                     <span>Requested</span> 
+               </div>
+               <div class="btn btn-message" 
+               *ngIf="getStatusFlag('already_a_contact') && this.profileParams?.selfProfile == 'false'" (click)="this.navigateTo('textmsg')">
+                 <img src="./assets/Message Button Icon.svg"> 
+                 <span>Text</span> 
+             </div>
 
-              <div 
-              *ngIf="this.contactStatus?.request_received && this.profileParams?.selfProfile == 'false'"
-              class="accept-reject-friend-requests">
-                <div class="request-options">
-                  <img src="../../../assets/tick.svg" (click)="friendRequestStatus(1)">
-                    <span>Friend Request</span>
-                  <img src="../../../assets/cross.svg" (click)="friendRequestStatus(0)">
-                </div>
-                
-              </div>
+             <div 
+             *ngIf="getStatusFlag('request_received') && this.profileParams?.selfProfile == 'false'"
+             class="accept-reject-friend-requests">
+               <div class="request-options">
+                 <img src="../../../assets/tick.svg" (click)="friendRequestStatus(1)">
+                   <span>Friend Request</span>
+                 <img src="../../../assets/cross.svg" (click)="friendRequestStatus(0)">
+               </div>
+               
+             </div>
 
-                </div>
-                
-            </div>
+               </div>
+               
+           </div>
+     </div>
       </div>
+      
   </div>
   <div class="whiteregion">
         <div class="collection-heading">

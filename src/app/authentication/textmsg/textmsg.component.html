@@ -44,11 +44,26 @@
 
     </div>
     <div class="message">
-        <div *ngFor="let msgArray of messageArray">
+        <!-- <div *ngFor="let msgArray of messageArray">
             {{msgArray}}
+        </div> -->
+        <div class="messages-parent">
+            <div class="user-heading">
+                <span>Friends Name</span>
+                <div class="messages-container">
+                    <img src="../../../assets/setting.svg">
+                </div>
+            </div>
+            
         </div>
-        <input type="text" [(ngModel)]="message">
-        <button class="btn btn-primary" (click)="sendMessages()"> SEND </button>
-
+        <div class="input-text-parent">
+            <div class="input-text-area">
+                <img class="microphone" src="../../../assets/microphone.svg">
+                <img class="smile" src="../../../assets/smile.svg">
+                <input type="text" [(ngModel)]="message">
+                <img src="../../../assets/send.svg" (click)="sendMessages()">
+            </div>
+        </div>
+        
     </div>
 </div>

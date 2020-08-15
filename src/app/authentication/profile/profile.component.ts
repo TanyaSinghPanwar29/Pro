@@ -3,8 +3,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { CommonService } from 'src/app/services/commonService';
 import { ApplicationURLs } from 'src/app/services/apiEnums';
 import { UtilsService } from 'src/app/services/utils.service';
-import { stat } from 'fs';
-import { TypeScriptEmitter } from '@angular/compiler';
 
 @Component({
   selector: 'app-profile',
@@ -94,6 +92,10 @@ export class ProfileComponent implements OnInit {
         'not_a_contact'
       ] = true;
     })
+  }
+
+  getStatusFlag = (status) => {
+    return this.contactStatus[status] ? true : false;
   }
 
   setContactStatus = (status) => {
