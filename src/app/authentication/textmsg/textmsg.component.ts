@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class TextmsgComponent implements OnInit {
   public socket; 
   search : string;
+  userNames;
   sidebarid: string;
   showSearchResults : boolean = false;
   showSideBar : boolean = false;
@@ -25,8 +26,19 @@ export class TextmsgComponent implements OnInit {
     this.socket.on(this.utilsService.getEmail(),(data) => {
       console.log(data)
       this.messageArray.push(data.message);
+    
+      })
 
-    })
+  this.getuserNames();
+  
+}
+
+getuserNames(){
+ var username = this.utilsService.getUserName();
+  this.commonService.makeGetRequest(ApplicationURLs.userInfo,username).subscribe((res) =>{
+    console.log(res)
+    this.userNames = res
+  })
 }
 
 closeSearchResults = () => {
