@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { BaseURL } from './apiEnums'
+import { Subject } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -28,5 +29,6 @@ export class CommonService{
           params: httpParams
         });
     }
+    
 
 }

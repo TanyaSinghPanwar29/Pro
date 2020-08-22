@@ -12,7 +12,8 @@ export enum ApplicationURLs  {
     userInfo = "api/userInfo",
     connect = "api/friendRequest",
     userStatus="api/userStatus",
-    handleFriendRequest = 'api/handleFriendRequest'
+    handleFriendRequest = 'api/handleFriendRequest',
+    getUserFriends = 'api/getUserFriends'
 }
 
 

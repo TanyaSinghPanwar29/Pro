@@ -4,14 +4,29 @@
             <img class="viewprofile" src="./assets/menu_btn.svg" (click)="opensidebar()">
             <div class="search-box">
                 <input type="search" class="searchbox" placeholder="Search for new friends..." [(ngModel)]="search"
-                (input)="onSearch(search)" />
+                    (input)="onSearch(search)" />
                 <img *ngIf="this.showSearchResults" src="./assets/cross-icon.svg" (click)="this.closeSearchResults()">
             </div>
-            
-            
+
+
         </div>
-        <div *ngIf="this.showSearchResults" >
-            
+        <div *ngIf="!this.showSearchResults">
+            <div class="position-relative  conversation" *ngFor="let userFriend of userFriends | keyvalue "
+                (click)="userFriend69(userFriend)">
+                <div class="friends-container " [ngClass]="{'selected':  userFriend?.key === this.selectedChat}">
+                    <div class="friends-profile-img">
+                        <img src="./assets/profile.svg">
+                    </div>
+                    <span class="friends-username">
+                        {{userFriend?.key}}
+                    </span>
+                </div>
+            </div>
+        </div>
+
+
+        <div *ngIf="this.showSearchResults">
+
             <div class="search-result" *ngFor="let resArray of resArrays" (click)="getuserinfo(resArray?.username)">
                 <div class="search-profile-image">
                     <img src="./assets/profile.svg">
@@ -28,33 +43,33 @@
 
         <div class="sidebar-profile-img">
             <div class="sidebar-image"><img src="./assets/default.svg"></div>
-            <div class="user-name" >
+            <div class="user-name">
                 <span class="name">{{this.userNames?.first_Name}} {{this.userNames?.last_Name}}</span>
                 <span class="desp">{{this.userNames?.description}}</span>
             </div>
         </div>
 
         <div class="icons">
-         <div class="profile option-container"><img src="../assets/user-circle-solid.svg"><span (click)="goToProfile()">PROFILE</span></div>
-         <div class="option-container"><img src="../assets/bell-icon.svg"><span (click)="goToProfile()">NOTIFICATIONS</span></div>
-        <div class="logout option-container"><img src="../assets/sign-out-alt-solid.svg"><span (click)="goToSignOut()">SIGN OUT</span></div>
+            <div class="profile option-container"><img src="../assets/user-circle-solid.svg"><span
+                    (click)="goToProfile()">PROFILE</span></div>
+            <div class="option-container"><img src="../assets/bell-icon.svg"><span
+                    (click)="goToProfile()">NOTIFICATIONS</span></div>
+            <div class="logout option-container"><img src="../assets/sign-out-alt-solid.svg"><span
+                    (click)="goToSignOut()">SIGN OUT</span></div>
         </div>
 
 
 
     </div>
     <div class="message">
-        <!-- <div *ngFor="let msgArray of messageArray">
-            {{msgArray}}
-        </div> -->
         <div class="messages-parent">
             <div class="user-heading">
-                <span>Friends Name</span>
+                <span> {{this.selectedChat}}</span>
                 <div class="messages-container">
                     <img src="../../../assets/setting.svg">
                 </div>
             </div>
-            
+
         </div>
         <div class="input-text-parent">
             <div class="input-text-area">
@@ -64,6 +79,6 @@
                 <img src="../../../assets/send.svg" (click)="sendMessages()">
             </div>
         </div>
-        
+
     </div>
 </div>

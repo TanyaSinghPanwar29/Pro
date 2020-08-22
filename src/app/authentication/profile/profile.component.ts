@@ -95,6 +95,7 @@ export class ProfileComponent implements OnInit {
   }
 
   getStatusFlag = (status) => {
+    
     return this.contactStatus[status] ? true : false;
   }
 
@@ -104,3 +105,6 @@ export class ProfileComponent implements OnInit {
   }
 
 }
+
+
+
