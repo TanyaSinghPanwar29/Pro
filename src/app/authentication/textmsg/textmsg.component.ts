@@ -18,6 +18,7 @@ export class TextmsgComponent implements OnInit {
   sidebarid: string;
   showSearchResults: boolean = false;
   showSideBar: boolean = false;
+
   constructor(private utilsService: UtilsService, private router: Router, private commonService: CommonService) {
     this.connect();
   }
@@ -25,12 +26,11 @@ export class TextmsgComponent implements OnInit {
   messageArray = [];
   resArrays;
   ngOnInit(): void {
-
-    this.socket.on(this.utilsService.getEmail(), (data) => {
-      this.messageArray.push(data.message);
-
+    this.socket.on(this.utilsService.getUserName(), (data) => {
+      console.log(data);
+      this.messageArray.push(data);
+      console.log(this.messageArray)
     })
-
     this.getuserNames();
     this.getUserFriends();
 
@@ -100,21 +100,26 @@ export class TextmsgComponent implements OnInit {
 
     })
   }
-
+  
+  isSelfUserName(sentBy){
+              return sentBy === this.utilsService.getUserName()
+              
+  }
 
   sendMessages() {
-    this.socket.emit(this.utilsService.getEmail(), {
+    let messageBody = {
       message: this.message,
-      sentBy: this.utilsService.getEmail(),
-      sentTo: "efg@gmail.com"
-    })
-    this.messageArray.push(this.message)
+      sentBy: this.utilsService.getUserName(),
+      sentTo: this.selectedChat
+    }
+    this.socket.emit(this.utilsService.getUserName(), messageBody);
+    this.messageArray.push(messageBody);
     this.message = ''
   }
   connect = () => {
 
     this.socket = io.connect(BaseURL.url, {
-      query: "tunnel=" + this.utilsService.getEmail()
+      query: "tunnel=" + this.utilsService.getUserName()
 
     })
   }

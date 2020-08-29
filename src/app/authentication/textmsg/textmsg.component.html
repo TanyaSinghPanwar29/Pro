@@ -61,7 +61,16 @@
 
 
     </div>
-    <div class="message">
+    <div class="initial-message-parent message" *ngIf="!this.selectedChat">
+       
+        <div class="initial-message">
+            <span>
+                Please select a chat to start messaging
+            </span>
+        </div>
+
+    </div>
+    <div class="message" *ngIf="this.selectedChat">
         <div class="messages-parent">
             <div class="user-heading">
                 <span> {{this.selectedChat}}</span>
@@ -71,7 +80,24 @@
             </div>
 
         </div>
+
+        <div class="chat-messages-parent" >
+         <div class="chat-messages" *ngFor="let msg of messageArray">
+            <div class="right" *ngIf="isSelfUserName(msg.sentBy)"> 
+                <span>{{msg.message}}</span>
+            </div>
+           
+            <div class="left" *ngIf="!isSelfUserName(msg.sentBy)">
+                 <span>{{msg.message}}</span>
+            </div>
+         </div>
+
+        </div>
+
+
+
         <div class="input-text-parent">
+
             <div class="input-text-area">
                 <img class="microphone" src="../../../assets/microphone.svg">
                 <img class="smile" src="../../../assets/smile.svg">

@@ -10,6 +10,9 @@
     position: relative;
     width: 70%;
 }
+.chat-messages{
+    padding: 0 20px;
+}
 .search-box img {
     position: absolute;
     right: 10px;
@@ -148,6 +151,47 @@
 }
 .selected{
     border: 2px solid #035ee6;
+}
+
+.initial-message-parent{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.right{
+    text-align: right;
+    margin-bottom: 1em;
+}
+.right span{
+   
+    background-color: #035ee6;
+    padding: 5px 20px;
+    border-radius: 10px;
+    color: white;
+    
+}
+
+.left span{
+    
+    background-color: white;
+    padding: 5px 20px;
+    border-radius: 10px;
+    color: #3882f1;
+    border: 2px solid rgba(129, 177, 250, 0.6);
+}
+
+.left{
+    text-align: left;
+    margin-bottom: 1em;
+}
+
+.initial-message{
+    background-color: rgba(0,0,0, 0.3);
+    width: fit-content;
+    color: white;
+    padding: 5px 30px;
+    border-radius: 15px ;
 }
 .conversation{
    display: flex;
