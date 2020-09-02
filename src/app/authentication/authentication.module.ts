@@ -8,6 +8,13 @@ import { ProfileComponent } from './profile/profile.component';
 import { TextmsgComponent } from './textmsg/textmsg.component';
 import { DetailsEditComponent } from './details-edit/details-edit.component';
 import { RouterModule } from '@angular/router';
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
+import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+
+const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+  suppressScrollX: true
+};
 
 @NgModule({
   declarations: [LoginComponent, SignUpComponent, ProfileComponent, TextmsgComponent, DetailsEditComponent],
@@ -16,7 +23,14 @@ import { RouterModule } from '@angular/router';
     AuthenticationRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    RouterModule
+    RouterModule,
+    PerfectScrollbarModule
+  ],
+  providers: [
+    {
+      provide: PERFECT_SCROLLBAR_CONFIG,
+      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+    }
   ]
 })
 export class AuthenticationModule { }

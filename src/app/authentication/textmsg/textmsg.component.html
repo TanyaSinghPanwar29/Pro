@@ -73,7 +73,7 @@
     <div class="message" *ngIf="this.selectedChat">
         <div class="messages-parent">
             <div class="user-heading">
-                <span> {{this.selectedChat}}</span>
+                <span> <i> {{this.selectedChat}} </i></span>
                 <div class="messages-container">
                     <img src="../../../assets/setting.svg">
                 </div>
@@ -81,16 +81,19 @@
 
         </div>
 
-        <div class="chat-messages-parent" >
-         <div class="chat-messages" *ngFor="let msg of messageArray">
-            <div class="right" *ngIf="isSelfUserName(msg.sentBy)"> 
-                <span>{{msg.message}}</span>
-            </div>
+        <div class="chat-messages-parent" id="message-parent" #messageParent>
            
-            <div class="left" *ngIf="!isSelfUserName(msg.sentBy)">
-                 <span>{{msg.message}}</span>
-            </div>
-         </div>
+                <div class="chat-messages" *ngFor="let msg of this.getMessageArray()">
+                    <div class="right" *ngIf="isSelfUserName(msg.sentBy)"> 
+                        <span>{{msg.message}}</span>
+                    </div>
+                   
+                    <div class="left" *ngIf="!isSelfUserName(msg.sentBy)">
+                         <span>{{msg.message}}</span>
+                    </div>
+                 </div>
+           
+               
 
         </div>
 
@@ -101,7 +104,7 @@
             <div class="input-text-area">
                 <img class="microphone" src="../../../assets/microphone.svg">
                 <img class="smile" src="../../../assets/smile.svg">
-                <input type="text" [(ngModel)]="message">
+                <input type="text" (keydown.enter)="this.sendMessages()" [(ngModel)]="message">
                 <img src="../../../assets/send.svg" (click)="sendMessages()">
             </div>
         </div>

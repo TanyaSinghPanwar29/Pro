@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import * as io from 'socket.io-client';
 import { BaseURL, ApplicationURLs } from 'src/app/services/apiEnums';
 import { UtilsService } from 'src/app/services/utils.service';
 import { CommonService } from 'src/app/services/commonService';
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-textmsg',
   templateUrl: './textmsg.component.html',
   styleUrls: ['./textmsg.component.css']
 })
 export class TextmsgComponent implements OnInit {
+  @ViewChild("messageParent") message_parent: ElementRef
   public socket;
   search: string;
   selectedChat;
@@ -27,19 +29,28 @@ export class TextmsgComponent implements OnInit {
   resArrays;
   ngOnInit(): void {
     this.socket.on(this.utilsService.getUserName(), (data) => {
-      console.log(data);
-      this.messageArray.push(data);
-      console.log(this.messageArray)
+      // this.messageArray.push(data);
+      if(this.userFriends){
+        if(this.userFriends[data.sentBy].messageArray){
+          this.userFriends[data.sentBy].messageArray.push(data);
+        } else {
+          this.userFriends[data.sentBy].messageArray = [data];
+        }
+      }
     })
     this.getuserNames();
     this.getUserFriends();
-
+    
   }
-
+  getMessageArray(){
+    return (this.userFriends[this.selectedChat].messageArray) 
+    ? this.userFriends[this.selectedChat].messageArray : [];
+  }
   getUserFriends() {
     var username = this.utilsService.getUserName();
     this.commonService.makeGetRequest(ApplicationURLs.getUserFriends, username).subscribe((res: any) => {
       this.userFriends = res.friends
+      console.log(this.userFriends);
     })
   }
 
@@ -106,14 +117,27 @@ export class TextmsgComponent implements OnInit {
               
   }
 
+  scrollDivToBottom = (out) => {
+    var isScrolledToBottom = out.scrollHeight - out.clientHeight <= out.scrollTop + 1;
+    if(isScrolledToBottom)
+      out.scrollTop = out.scrollHeight - out.clientHeight;
+  }
+
   sendMessages() {
+    let messageParent:any = document.getElementById('message-parent');
+    this.scrollDivToBottom(messageParent);
+
     let messageBody = {
       message: this.message,
       sentBy: this.utilsService.getUserName(),
       sentTo: this.selectedChat
     }
     this.socket.emit(this.utilsService.getUserName(), messageBody);
-    this.messageArray.push(messageBody);
+    if(this.userFriends[this.selectedChat].messageArray){
+      this.userFriends[this.selectedChat].messageArray.push(messageBody);
+    } else {
+      this.userFriends[this.selectedChat].messageArray = [messageBody];
+    }
     this.message = ''
   }
   connect = () => {
