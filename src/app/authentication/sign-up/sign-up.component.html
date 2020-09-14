@@ -39,6 +39,14 @@
                         <p class="errorMessage">
                             {{ this.validator.getErrorMessage(this.signUpForm.get('password'),'password') }}</p>
                     </div>
+                    <div class="su-input">
+                        <input
+                            [ngClass]="{'redBorder': this.validator.getErrorMessage(this.signUpForm.get('cpassword'),'cpassword')}"
+                            formControlName="cpassword" class="mytext3 input-field" type="password"
+                            placeholder="CONFIRM PASSWORD" id="password" name="password">
+                        <p class="errorMessage">
+                            {{ this.validator.getErrorMessage(this.signUpForm.get('cpassword'),'cpassword') }}</p>
+                    </div>
             
 
                 </div>

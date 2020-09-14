@@ -5,6 +5,8 @@ import { CommonService } from 'src/app/services/commonService';
 import { Validator } from 'src/app/validator-util';
 import { ApplicationURLs } from 'src/app/services/apiEnums';
 import { UtilsService } from 'src/app/services/utils.service';
+import * as CryptoJS from 'crypto-js';
+
 
 
 @Component({
@@ -15,7 +17,7 @@ import { UtilsService } from 'src/app/services/utils.service';
 export class LoginComponent implements OnInit {
 
   serviceErrorMessage = { message: '', show: false }
-
+  encryptSecretKey:string = "key";
   constructor(private router: Router,
     public fb: FormBuilder,
     public commonService: CommonService,
@@ -25,6 +27,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.buildForm();
   }
+ 
 
   validateUsername = (control: FormControl) => {
     let value = control.value +"";
@@ -48,6 +51,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
+
   navigateToSignUp() {
     this.router.navigateByUrl('signUp')
   }
@@ -55,14 +59,23 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   
+  encryptData(data) {
+    try {
+      return CryptoJS.AES.encrypt(data, this.encryptSecretKey).toString();
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
   login() {
     this.loginForm.markAllAsTouched();
     this.loginForm.markAsDirty();
+    
     let Body = {
       username: this.loginForm.value.username,
-      password: this.loginForm.value.password
+      password: this.encryptData(this.loginForm.value.password)
     }
+    console.log(Body);
    
     if (this.loginForm.invalid || this.loginForm.controls["login-button"].disabled)
       return;

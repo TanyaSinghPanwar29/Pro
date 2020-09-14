@@ -33,7 +33,7 @@ export class Validator{
          }
 
         }
-     minLengths = {
+         minLengths = {
          password: 6,
          phone: 1000000000,
          nameLength: 3
@@ -50,7 +50,9 @@ export class Validator{
             case 'location':
                 return this.getLocaltionErrorMessage(control);    
             case 'user_name':
-                return this.getuserNameErrorMessage(control);      
+                return this.getuserNameErrorMessage(control); 
+            case 'confirmPassword':
+                return this.getConfirmPasswordErrorMessage(control,control);          
         }
     }
     getuserNameErrorMessage = (control : FormControl )  =>{

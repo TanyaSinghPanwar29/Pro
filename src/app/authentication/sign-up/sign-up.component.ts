@@ -4,7 +4,7 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 import { Validator } from 'src/app/validator-util';
 import { CommonService } from 'src/app/services/commonService';
 import { ApplicationURLs } from 'src/app/services/apiEnums';
-
+import * as CryptoJS from 'crypto-js';
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
@@ -15,7 +15,7 @@ export class SignUpComponent implements OnInit {
   public validator: Validator = new Validator();
 
   signUpForm: FormGroup;
- 
+  encryptSecretKey:string = "key";
   constructor(
     public router: Router,
     public fb:FormBuilder,
@@ -31,12 +31,21 @@ export class SignUpComponent implements OnInit {
     this.signUpForm = new FormGroup({
       "user_name": new FormControl('',[Validators.required,this.validateUsername]),
       "email": new FormControl('',[Validators.required,Validators.pattern(this.validator.emailRegex)]),
-      "password": new FormControl('',[Validators.required,Validators.minLength(this.validator.minLengths.password)])
+      "password": new FormControl('',[Validators.required,Validators.minLength(this.validator.minLengths.password)]),
+      "cpassword": new FormControl('',[Validators.required])
     }); 
   }
 
   navigateToSignIn = () => {
     this.router.navigateByUrl('login')
+  }
+
+  encryptData(data) {
+    try {
+      return CryptoJS.AES.encrypt(data, this.encryptSecretKey).toString();
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   validateUsername = (control: FormControl) => {
@@ -62,7 +71,7 @@ export class SignUpComponent implements OnInit {
     let body = {
       username: this.signUpForm.get('user_name').value,
       email: this.signUpForm.get('email').value,
-      password: this.signUpForm.get('password').value,
+      password:  this.encryptData(this.signUpForm.value.password),
     }
     this.commonService.makePostRequest(ApplicationURLs.signUp,body).subscribe((res:any)=>{
       if(res.success){
