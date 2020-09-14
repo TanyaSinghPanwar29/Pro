@@ -41,11 +41,11 @@
                     </div>
                     <div class="su-input">
                         <input
-                            [ngClass]="{'redBorder': this.validator.getErrorMessage(this.signUpForm.get('cpassword'),'cpassword')}"
+                            [ngClass]="{'redBorder': this.validator.getErrorMessage(this.signUpForm.get('cpassword'),'password')}"
                             formControlName="cpassword" class="mytext3 input-field" type="password"
                             placeholder="CONFIRM PASSWORD" id="password" name="password">
                         <p class="errorMessage">
-                            {{ this.validator.getErrorMessage(this.signUpForm.get('cpassword'),'cpassword') }}</p>
+                            {{ this.validator.getErrorMessage(this.signUpForm.get('cpassword'),'password') }}</p>
                     </div>
             
 

@@ -5,6 +5,7 @@ import { LoginComponent } from './authentication/login/login.component';
 import { ProfileComponent } from './authentication/profile/profile.component';
 import { TextmsgComponent } from './authentication/textmsg/textmsg.component';
 import { DetailsEditComponent } from './authentication/details-edit/details-edit.component';
+import { AuthGuardService } from './auth-guard.service';
 
 
 const routes: Routes = [
@@ -15,23 +16,31 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
   },
-  {
+  // {
+  //   path: '',
+  //   component: SignUpComponent,
+  // },
+  { 
     path: '',
-    component: SignUpComponent
+    redirectTo: 'signUp', 
+    pathMatch: 'full' 
   },
   {
     path: 'profile',
-    component: ProfileComponent
+    component: ProfileComponent,
+    canActivate:[AuthGuardService],
   },
   {
     path: 'textmsg',
-    component: TextmsgComponent
+    component: TextmsgComponent,
+    canActivate:[AuthGuardService] 
   },
   {
     path: 'details-edit',
-    component: DetailsEditComponent
+    component: DetailsEditComponent,
+    canActivate:[AuthGuardService] 
   }
 ];
 

@@ -134,7 +134,7 @@ export class TextmsgComponent implements OnInit {
     }
     this.socket.emit(this.utilsService.getUserName(), messageBody);
     if(this.userFriends[this.selectedChat].messageArray){
-      this.userFriends[this.selectedChat].messageArray.push(messageBody);
+      this.userFriends[this.selectedChat].messageArray.unshift(messageBody);
     } else {
       this.userFriends[this.selectedChat].messageArray = [messageBody];
     }
