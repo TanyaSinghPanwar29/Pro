@@ -37,7 +37,7 @@ export class SignUpComponent implements OnInit {
   }
 
   navigateToSignIn = () => {
-    this.router.navigateByUrl('login')
+    this.router.navigate(['login'], { replaceUrl: true })
   }
 
   encryptData(data) {
@@ -75,7 +75,7 @@ export class SignUpComponent implements OnInit {
     }
     this.commonService.makePostRequest(ApplicationURLs.signUp,body).subscribe((res:any)=>{
       if(res.success){
-        this.router.navigateByUrl('login')
+        this.router.navigate(['login'], { replaceUrl: true  })
       } else{
         //TO DO
       }

@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
 
 
   navigateToSignUp() {
-    this.router.navigateByUrl('signUp')
+    this.router.navigate(['signUp'],{ replaceUrl: true })
   }
   public validator: Validator = new Validator();
 
@@ -94,12 +94,13 @@ export class LoginComponent implements OnInit {
           this.utilsService.setUserName(Body.username);
           this.utilsService.setEmail(res.email)
           if(res.isUpdated){
-            this.router.navigateByUrl('textmsg');
+            this.router.navigate(['textmsg'], { replaceUrl: true  });
           } 
           else if(!res.isUpdated){
             this.router.navigate(['details-edit',{
               heading: 'TELL US MORE ABOUT YOURSELF',
-              button: 'SAVE'
+              button: 'SAVE',
+              replaceUrl: true
             }]);
           }
         } else if(res.success === false){
