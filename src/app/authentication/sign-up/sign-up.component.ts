@@ -32,12 +32,37 @@ export class SignUpComponent implements OnInit {
       "user_name": new FormControl('',[Validators.required,this.validateUsername]),
       "email": new FormControl('',[Validators.required,Validators.pattern(this.validator.emailRegex)]),
       "password": new FormControl('',[Validators.required,Validators.minLength(this.validator.minLengths.password)]),
-      "cpassword": new FormControl('',[Validators.required])
+      "cpassword": new FormControl('',[Validators.required,Validators.minLength(this.validator.minLengths.password),this.preventDistinctPasswords])
     }); 
   }
 
   navigateToSignIn = () => {
     this.router.navigate(['login'], { replaceUrl: true })
+  }
+
+  preventDistinctPasswords = (control: FormControl)  =>{
+    if(!this.signUpForm)
+    return null;
+
+    let password = (this.signUpForm.get('password').value) ? this.signUpForm.get('password').value : "";
+    let cpassword = (control.value) ?  control.value.toString() : "";
+
+    if(password.length > 0 && cpassword.length > 0 && password != cpassword)
+    return {
+      passwordMatch : false
+    }
+
+    return null;
+  }
+
+  getConfirmPasswordMessage(){
+    let password = (this.signUpForm.get('password').value) ? this.signUpForm.get('password').value : "";
+    let cpassword = (this.signUpForm.get('cpassword').value) ?  this.signUpForm.get('cpassword').value.toString() : "";
+
+    if(password.length > 0 && cpassword.length > 0 && password != cpassword)
+    return this.validator.errorMessages.password.notAMatch;
+
+    return this.validator.getErrorMessage(this.signUpForm.get('cpassword'),'password');
   }
 
   encryptData(data) {
